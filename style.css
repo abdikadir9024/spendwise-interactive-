@@ -1,422 +1,105 @@
-/* ==========================================================================
-   3. CSS Custom Properties / Design Tokens
-   ========================================================================== */
-:root {
-  /* Brand & Colors */
-  --brand-color: #4f46e5;       /* Primary Indigo */
-  --brand-hover: #4338ca;
-  --accent-color: #10b981;      /* Emerald Green for positive/savings */
-  --warning-color: #ef4444;     /* Red for over-budget */
-  
-  /* Surface & Background Colors */
-  --bg-color: #f8fafc;          /* Main Page Background */
-  --surface-color: #ffffff;     /* Card & Sidebar Background */
-  --surface-hover: #f1f5f9;
-  --border-color: #e2e8f0;
-
-  /* Typography Colors */
-  --text-primary: #0f172a;      /* Dark Slate */
-  --text-secondary: #64748b;    /* Cool Gray */
-  --text-on-brand: #ffffff;
-
-  /* Shadows & Radius */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-  --radius-lg: 16px;
-  --radius-md: 10px;
-  --radius-sm: 6px;
-
-  /* Transitions */
-  --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* ==========================================================================
-   Stretch Goal: Dark Theme (Automatic OS Preference)
-   ========================================================================== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --brand-color: #6366f1;
-    --brand-hover: #818cf8;
-    --accent-color: #34d399;
-    --warning-color: #f87171;
-
-    --bg-color: #0f172a;
-    --surface-color: #1e293b;
-    --surface-hover: #334155;
-    --border-color: #334155;
-
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-  }
-}
-
-/* ==========================================================================
-   Base Styles & Reset
-   ========================================================================== */
-* {
+/* General Layout */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
   margin: 0;
-  padding: 0;
+  padding: 20px;
+}
+
+.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#main-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.subheading {
+  color: #666;
+}
+
+/* Card Section */
+.card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  line-height: 1.5;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ==========================================================================
-   2. Modern CSS Grid Layout (Overall Dashboard Structure)
-   ========================================================================== */
-.dashboard-container {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "sidebar header"
-    "sidebar main";
-  min-height: 100vh;
-}
-
-/* ==========================================================================
-   1 & 2. Sidebar Component (Flexbox Structure)
-   ========================================================================== */
-.sidebar {
-  grid-area: sidebar;
-  background-color: var(--surface-color);
-  border-right: 1px solid var(--border-color);
-  padding: 24px 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 12px 24px 12px;
-}
-
-.brand-icon {
-  font-size: 1.5rem;
-}
-
-.brand h2 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--brand-color);
-}
-
-.nav-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  text-decoration: none;
-  color: var(--text-secondary);
-  font-weight: 500;
-  font-size: 0.95rem;
-  border-radius: var(--radius-sm);
-  transition: var(--transition-fast);
-}
-
-.nav-item:hover {
-  background-color: var(--surface-hover);
-  color: var(--text-primary);
-}
-
-.nav-item.active {
-  background-color: var(--brand-color);
-  color: var(--text-on-brand);
-}
-
-.sidebar-footer {
-  padding-top: 16px;
-  border-top: 1px solid var(--border-color);
-}
-
-.user-profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px;
-}
-
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: var(--brand-color);
-  color: var(--text-on-brand);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.user-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.user-name {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.user-role {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
-
-/* ==========================================================================
-   1 & 2. Header Component (Flexbox Alignment)
-   ========================================================================== */
-.header {
-  grid-area: header;
-  background-color: var(--surface-color);
-  border-bottom: 1px solid var(--border-color);
-  padding: 20px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.header-left h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.subtitle {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  margin-top: 2px;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 8px 14px;
-}
-
-.search-bar input {
+.btn {
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  background: transparent;
-  outline: none;
-  color: var(--text-primary);
-  font-size: 0.875rem;
-}
-
-.notification-btn {
-  position: relative;
-  background: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 8px 12px;
+  padding: 10px 16px;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
-  transition: var(--transition-fast);
 }
 
-.notification-btn:hover {
-  background-color: var(--surface-hover);
+.btn:hover {
+  background-color: #0056b3;
 }
 
-.notification-badge {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 8px;
-  height: 8px;
-  background-color: var(--warning-color);
-  border-radius: 50%;
+/* Dynamic Expense List */
+.expense-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* ==========================================================================
-   1 & 2. Main Area Grid & Flex Cards
-   ========================================================================== */
-.main-content {
-  grid-area: main;
-  padding: 32px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  align-content: start;
-}
-
-/* Individual Category Cards */
-.card {
-  background-color: var(--surface-color);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 20px;
+.expense-item {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  box-shadow: var(--shadow-sm);
-  outline: none;
-  
-  /* 5. Micro-interactions Preparation */
-  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
-  cursor: pointer;
-}
-
-/* 5. Card Hover & Keyboard Focus Animations (≤250ms requirement) */
-.card:hover,
-.card:focus-visible {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--brand-color);
-}
-
-.card-header {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
 }
 
-.card-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  background-color: var(--bg-color);
+.expense-item:last-child {
+  border-bottom: none;
 }
 
-.card-badge {
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: var(--radius-sm);
-  background-color: var(--bg-color);
-  color: var(--text-secondary);
+.placeholder-text {
+  color: #888;
+  font-style: italic;
 }
 
-.card-body h3 {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+/* Status Indicators */
+.status-message {
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 10px;
 }
 
-.card-amount {
-  font-size: 1.65rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 4px 0 12px 0;
+.status-ok {
+  background-color: #d4edda;
+  color: #155724;
 }
 
-.card-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  margin-bottom: 12px;
-}
-
-.percentage {
-  font-weight: 600;
-}
-
-.percentage.positive { color: var(--text-secondary); }
-.percentage.warning { color: var(--warning-color); }
-.percentage.accent { color: var(--accent-color); }
-
-/* Progress Bars */
-.progress-bar {
-  height: 6px;
-  background-color: var(--bg-color);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background-color: var(--brand-color);
-  border-radius: 3px;
-}
-
-.warning-fill { background-color: var(--warning-color); }
-.accent-fill { background-color: var(--accent-color); }
-
-/* ==========================================================================
-   4. Responsive Layout (Single-column below 768px)
-   ========================================================================== */
-@media (max-width: 768px) {
-  .dashboard-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
-    grid-template-areas:
-      "header"
-      "sidebar"
-      "main";
-  }
-
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px 20px;
-  }
-
-  .header-right {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .search-bar {
-    flex: 1;
-  }
-
-  .sidebar {
-    border-right: none;
-    border-bottom: 1px solid var(--border-color);
-    padding: 12px 20px;
-  }
-
-  .nav-menu {
-    flex-direction: row;
-    overflow-x: auto;
-    padding-bottom: 8px;
-  }
-
-  .nav-item {
-    white-space: nowrap;
-  }
-
-  .sidebar-footer {
-    display: none; /* Hide user block in mobile view for cleaner layout */
-  }
-
-  .main-content {
-    padding: 20px;
-    grid-template-columns: 1fr; /* Single column layout for cards */
-  }
+.status-deficit {
+  background-color: #f8d7da;
+  color: #721c24;
 }
